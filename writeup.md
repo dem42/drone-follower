@@ -1,7 +1,11 @@
 ## Project: Follow Me
 
 [//]: # (Image References)
-[image1]: ./images/architecture.png
+[image1]: ./images/network.png
+[image2]: ./images/overfitting.png
+[image3]: ./images/train_img1.jpeg
+[image4]: ./images/train_img2.jpeg
+[image5]: ./images/train_img3.jpeg
 
 ### Intro
 The purpose of the Follow Me project is to build a semantic segmentation filter which when applied to an input image will classify each pixel of that image into one of three categories. In this project the categories are `[hero, crowd, background]`. The semantic segmentation filter therefore gives us scene understanding of an image at pixel resolution. The purpose is to use the classifier as the decision mechanism in a follower drone, which locates the hero in its camera input and follows the hero.
@@ -11,7 +15,7 @@ My network architecture choice in this project was inspired by the architecture 
 
 My chosen architecture is that of a fully convolutional nework which consists of an encoder and a decoder. Here is the architecture in visual format:
 
-[image1]: ./images/network.png
+![Network Architecture][image1]
 
 ###### Encoder
 The encoder consists of four blocks, each of which contains two separable convolutions with `kernel=3, stride=1` and a max pooling layer with `stride=2`. The first block of convolutions learn parameters for 32 filters, the second block for 64, the third block for 128 filters and the final block learns 256 filters. This group of four blocks of increasing filter depth is then connected to a 1x1 convolutional layer with filter depth 256. This layer collects all the pixel information into a deep output. The purpose of the encoder is to extract features into a thin but deep output tensor.
@@ -38,16 +42,16 @@ In the end I stettled on using `batch_num = 60` and I ran multiple trainings wit
 `learning_rate = 0.0001` and `epochs = 3`
 I did it this way because I noticed that if I run too many epochs with the same learning rate my networks end up overfitting as shown in the image below where the validation loss fluctuates heavily even though the training set loss is strictly decreasing. 
 
-[image2]: ./images/overfitting.png
+![Overfitting][image2]
 
 I found that a big improvement was to set `steps_per_epoch=300` and `validation_steps=100`. This seemed a bit counterintuitive to me because these parameters should be set to number of images divided by batch num. I assume it helped because my network architecture has many parameters due to many layers so it worked better when trained with a larger input per SGD step. However, setting increasing values caused each epoch to take 350 seconds even on a p2.xlarge in AWS. 
 
 ### Data collection
 I first used the provided dataset to perform hyperparameter optimization. Then I collected around 5000 training and 2000 validation images using the drone simulator to build a good dataset with many different angles of the crowd, hero and the background. I focused on creating large crowds using short spawning and on taking images of the hero from all possible angles. Here are some example of the image I collected:
 
-[image3]: ./images/train_img1.jpeg
-[image4]: ./images/train_img2.jpeg
-[image5]: ./images/train_img3.jpeg
+![Angle 1][image3]
+![Angle 2][image4]
+![Grass][image5]
 
 The images are stored as .jpg to keep their size smaller and additionally a mask is stored which is used during training as a label for which pixels are which class.
 
