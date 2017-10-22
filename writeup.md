@@ -6,10 +6,10 @@
 [image3]: ./images/train_img1.jpeg
 [image4]: ./images/train_img2.jpeg
 [image5]: ./images/train_img3.jpeg
-[image6]: ./images/following1.png
-[image7]: ./images/following2.png
-[image8]: ./images/pred_viz1.png
-[image9]: ./images/pred_viz2.png
+[image6]: ./images/following1.PNG
+[image7]: ./images/following2.PNG
+[image8]: ./images/pred_viz1.PNG
+[image9]: ./images/pred_viz2.PNG
 
 ### Intro
 The purpose of the Follow Me project is to build a semantic segmentation filter which when applied to an input image will classify each pixel of that image into one of three categories. In this project the categories are `[hero, crowd, background]`. The semantic segmentation filter therefore gives us scene understanding of an image at pixel resolution. The purpose is to use the classifier as the decision mechanism in a follower drone, which locates the hero in its camera input and follows the hero.
