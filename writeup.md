@@ -66,10 +66,12 @@ The final numbers from the training were
 `time per epoch: 369s - loss: 0.0148 - val_loss: 0.0177`
 
 Here are some images from running the drone in follow me mode:
+
 ![Following target][image6]
 ![Following target][image7]
 
 And here is the view of the FCN output when running the follow me drone with `--pred_viz`
+
 ![Following target][image8]
 ![Following target][image9]
 
