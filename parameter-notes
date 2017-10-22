@@ -1,0 +1,243 @@
+* test 1
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 20
+steps_per_epoch = 200
+validation_steps = 50
+workers = 2
+epoch time ?
+** a
+enc1 -> 32, 2
+enc2 -> 64,2
+conv1x1, 64
+dec1 -> enc1, 32
+dec2 -> input, num_class
+conv2d, 3, soft, same
+** r
+loss: 0.0259 - val_loss: 0.0337
+iou : ~0.38
+* test 2
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 20
+steps_per_epoch = 200
+validation_steps = 50
+workers = 10
+epoch time 104s
+** a
+enc1 -> 32, 2
+enc2 -> 64,2
+enc2 -> 128,2
+conv1x1, 128
+dec1 -> enc2, 64
+dec1 -> enc1, 32
+dec2 -> input, num_class
+conv2d, 3, soft, same
+** r
+loss: 0.0176 - val_loss: 0.0444
+iou: 0.271
+after epoch 30
+0.0152 - val_loss: 0.0341
+ious: 0.38
+after epoch 33 with learning rate 0.001
+loss: 0.0131 - val_loss: 0.0293
+ious: 0.40
+* test 3
+** h
+learning_rate = 0.01
+batch_size = 20
+num_epochs = 20
+steps_per_epoch = 200
+validation_steps = 50
+workers = 10
+took 37s per epoch
+** a
+enc1 -> 32, 2
+enc2 -> 64,2
+enc2 -> 128,2
+conv1x1, 128
+dec1 -> enc2, 64
+dec1 -> enc1, 32
+dec2 -> input, num_class
+conv2d, 3, soft, same
+** r
+with 40 epoch second 20 with 0.001
+loss: 0.0166 - val_loss: 0.0277 
+ious: 0.385
+* test 4
+** h
+batch size increase
+learning_rate = 0.01/0.001
+batch_size = 100
+num_epochs = 20/10
+steps_per_epoch = 200
+validation_steps = 50
+workers = 10
+** a
+3 encoder up to 256, 2 stride
+1x1
+3 decoder
+conv2d,3
+** r 
+overfitting
+184s - loss: 0.0090 - val_loss: 0.0399
+ious: 0.362
+* test 5
+with dropout in input layer -> with 0.01,0.005, 0.001 around 30 epochs
+batches 20
+very bad ious: ~0.30
+* test 8
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 5
+steps_per_epoch = 200
+validation_steps = 50
+workers = 10
+** a
+3 enc with stride = 1 each followed by max pooling with 2
+conv1x1 at 128
+decoder each mixing with pre-pooled layer
+** r
+168s - loss: 0.0212 - val_loss: 0.0317
+ious: .406 after 5 epoch
+lucky?
+168s - loss: 0.0144 - val_loss: 0.0274 after 5 more epoch at 0.001
+ious: .415
+* test 9
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 20
+steps_per_epoch = 250
+validation_steps = 50
+workers = 10
+** a
+3 enc with stride = 1 each followed by max pooling with 2
+conv1x1 at 128
+decoder each mixing with pre-pooled layer
+** r
+loss: 0.0117 - val_loss: 0.0371
+ious: 0.22 
+* test 10
+** h 
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 20
+steps_per_epoch = 100
+validation_steps = 50
+workers = 10
+** a
+3 enc with stride = 1 each followed by max pooling with 2
+conv1x1 at 128
+decoder each mixing with pre-pooled layer
+** r
+88s loss: 0.0259 - val_loss: 0.0364
+ious: .30
+* test 11
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 20
+steps_per_epoch = 50
+validation_steps = 50
+workers = 10
+** a
+3 enc with stride = 1 each followed by max pooling with 2
+conv1x1 at 128
+decoder each mixing with pre-pooled layer
+** r
+loss: 0.0316 - val_loss: 0.0940
+51s - loss: 0.0358 - val_loss: 0.1339
+* test 12 SAVED AS MODEL 9
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 5
+steps_per_epoch = 300
+validation_steps = 50
+workers = 10
+** a
+3 enc with stride = 1 each followed by max pooling with 2
+conv1x1 at 128
+decoder each mixing with pre-pooled layer
+** r
+239s - loss: 0.0181 - val_loss: 0.0265
+0.426353841057
+* test 15
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 8
+steps_per_epoch = 300
+validation_steps = 100
+workers = 10
+** a
+3 enc with stride = 1 each followed by max pooling with 2
+first layer doubled
+conv1x1 at 128
+decoder each mixing with pre-pooled layer
+** r
+ 318s - loss: 0.0163 - val_loss: 0.0281
+0.451
+* test 16
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 8
+steps_per_epoch = 300
+validation_steps = 100
+workers = 10
+** a
+3 enc with stride = 1 each followed by max pooling with 2
+all encoder layers doubled
+conv1x1 at 128
+decoder each mixing with pre-pooled layer
+** r
+352s - loss: 0.0133 - val_loss: 0.0281
+after 5 more epochs at 0.001
+got 
+353s - loss: 0.0103 - val_loss: 0.0262
+with 
+ious:
+0.483157650106
+* test 17
+** h
+learning_rate = 0.01
+batch_size = 60
+num_epochs = 8
+steps_per_epoch = 300
+validation_steps = 100
+workers = 10
+then 0.001 with epoch 5
+** a
+4 enc with stride = 1 each followed by max pooling with 2
+all encoder layers doubled
+conv1x1 at 128
+decoder each mixing with pre-pooled layer
+** r
+loss: 0.0094 val loss 0.0270
+ious 0.47
+after 
+0.0001 with 3 epochs
+376s - loss: 0.0090 - val_loss: 0.0273
+and 
+ious: 0.492
+
+on my training data
+after 8 + 5
+369s - loss: 0.0153 - val_loss: 0.0168
+ious:
+0.54
+369s - loss: 0.0148 - val_loss: 0.0177
+0.541482190936
+* test 21
+0.01 8
+0.001 5
+0.0001 5
+0.005 5
+
+371s - loss: 0.0150 - val_loss: 0.0161
+ious 0.576264206789
