@@ -6,6 +6,10 @@
 [image3]: ./images/train_img1.jpeg
 [image4]: ./images/train_img2.jpeg
 [image5]: ./images/train_img3.jpeg
+[image6]: ./images/following1.png
+[image7]: ./images/following2.png
+[image8]: ./images/pred_viz1.png
+[image9]: ./images/pred_viz2.png
 
 ### Intro
 The purpose of the Follow Me project is to build a semantic segmentation filter which when applied to an input image will classify each pixel of that image into one of three categories. In this project the categories are `[hero, crowd, background]`. The semantic segmentation filter therefore gives us scene understanding of an image at pixel resolution. The purpose is to use the classifier as the decision mechanism in a follower drone, which locates the hero in its camera input and follows the hero.
@@ -62,6 +66,12 @@ The final numbers from the training were
 `time per epoch: 369s - loss: 0.0148 - val_loss: 0.0177`
 
 Here are some images from running the drone in follow me mode:
+![Following target][image6]
+![Following target][image7]
+
+And here is the view of the FCN output when running the follow me drone with `--pred_viz`
+![Following target][image8]
+![Following target][image9]
 
 ### Limitations and future improvements
 The biggest limitation is of course that the network has been training with images of 3D models from the simulator. Therefore, it can only follow those models and cannot be used outside of the simulator. To use the drone in the real world it would have to be retrained with real images. Obviously, the 3d models in the simulator are very simple and thus easily learnable, for example the hero model has very distinct red colors which make it easy to recognize. 
