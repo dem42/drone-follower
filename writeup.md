@@ -32,7 +32,7 @@ I used a stride of 1 in the convolutional layers because the max pooling layers 
 
 I used four a total of 8 convolutional layers because I found that adding layers improved the IOU metric because it adds more non-linearity. This however slows down the training process and the improvements decrease the more layers are added.
 
-I also experimented using `layers.DropOut` inside the encoder to improve regularization, but I didn't see any improvements. This coincides with what Long et all [^1] mention in their paper where patch subsampling using dropout did not yield improvements.
+I also experimented using `layers.DropOut` inside the encoder to improve regularization, but I didn't see any improvements. This coincides with what Long et al [^1] mention in their paper where patch subsampling using dropout did not yield improvements.
 
 ###### Decoder
 The decoder consists of four upsampling layers which use bilinear interpolation to perform upsampling. Since I  used max pooling with `stride=2` in the encoder I ended up reducing the input size by `2x2x2x2` along the width and height, so I used four layers of bilinear interpolation each of which upsamples by a factor of two. 
@@ -93,7 +93,7 @@ The biggest limitation is of course that the network has been training with imag
 
 However, in general the network could be used to follow any object as long as we could collect enough images of it and train the network with these images. So the network is very general, but needs a lot of data to achieve good accuracy.
 
-The performance of my network I think can still be improved. I stopped adding layers after reaching a very good accuracy and also because adding more layers slowed down the network. I also didn't experiment too much with the kernel size, but in the paper from Long et all [^1] their kernel sizes are much larger in the initial layers, so perhaps this could improve the network performance.
+The performance of my network I think can still be improved. I stopped adding layers after reaching a very good accuracy and also because adding more layers slowed down the network. I also didn't experiment too much with the kernel size, but in the paper from Long et al [^1] their kernel sizes are much larger in the initial layers, so perhaps this could improve the network performance.
 
 ### Bibliography
 [^1]: Jonathan Long, Evan Shelhamer, Trevor Darrell, "Fully Convolutional Networks for Semantic Segmentation"
